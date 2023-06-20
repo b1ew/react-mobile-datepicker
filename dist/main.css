@@ -198,7 +198,7 @@
   				padding-top: 0;
   			}
 .datepicker.android {
-  	background-color: #f5f5f5;
+  	background-color: #fefefe;
   }
 .datepicker.android .datepicker-header {
   		color: #31b6e7;
@@ -208,7 +208,7 @@
   		margin: 0 .625em;
   	}
 .datepicker.android .datepicker-viewport::after {
-  			background-image: linear-gradient(#f5f5f5,rgba(245, 245, 245, 0)52%,rgba(245, 245, 245, 0)48%,#f5f5f5);
+  			background-image: linear-gradient(#ffffff,rgba(255, 255, 255, 0)52%,rgba(255, 255, 255, 0)48%,#ffffff);
   		}
 .datepicker.android .datepicker-wheel {
   		border-top: 2px solid #31b6e7;
