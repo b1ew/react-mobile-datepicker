@@ -19,6 +19,10 @@ export interface DatePickerProps {
     onChange?: Function;
     onSelect?: Function;
     onCancel?: React.MouseEventHandler<HTMLButtonElement | HTMLDivElement>;
+    wheelClassName?: string;
+    colOneClassName?: string;
+    datePickerClassName?: string;
+    datePickerListClassName?: string;
 }
 /**
  * Class DatePicker Component Class
