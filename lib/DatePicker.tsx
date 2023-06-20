@@ -159,7 +159,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
               type={item.type}
               format={item.format}
               onSelect={handleDateSelect}
-              wheelClassName={`${wheelBorderRadiusClassName} ${wheelClassName}`}
+              wheelClassName={`${wheelClassName} ${wheelBorderRadiusClassName}`}
               colOneClassName={colOneClassName}
               datePickerListClassName={datePickerListClassName}
             />
