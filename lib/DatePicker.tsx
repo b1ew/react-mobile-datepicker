@@ -147,21 +147,24 @@ const DatePicker: React.FC<DatePickerProps> = ({
         </div>
       )}
       <div className='datepicker-content'>
-        {dataConfigList.map((item, index) => (
-          <DatePickerItem
-            key={index}
-            value={value}
-            min={min}
-            max={max}
-            step={item.step}
-            type={item.type}
-            format={item.format}
-            onSelect={handleDateSelect}
-            wheelClassName={wheelClassName}
-            colOneClassName={colOneClassName}
-            datePickerListClassName={datePickerListClassName}
-          />
-        ))}
+        {dataConfigList.map((item, index) => {
+          const wheelBorderRadiusClassName = index === 0 ? 'rounded-tr-none rounded-br-none' : index === (dataConfigList.length - 1) ? 'rounded-tl-none rounded-bl-none' : '';
+          return (
+            <DatePickerItem
+              key={index}
+              value={value}
+              min={min}
+              max={max}
+              step={item.step}
+              type={item.type}
+              format={item.format}
+              onSelect={handleDateSelect}
+              wheelClassName={`${wheelBorderRadiusClassName} ${wheelClassName}`}
+              colOneClassName={colOneClassName}
+              datePickerListClassName={datePickerListClassName}
+            />
+          );
+        })}
       </div>
       {showFooter && (
         <div className='datepicker-navbar'>

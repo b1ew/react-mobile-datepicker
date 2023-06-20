@@ -220,7 +220,7 @@
   	}
   	.datepicker-viewport {
   		&::after {
-  			background-image: linear-gradient(#ffffff,rgba(255, 255, 255, 0)52%,rgba(255, 255, 255, 0)48%,#ffffff);
+  			background-image: linear-gradient(#ffffff,rgba(255, 255, 255, 0)66%,rgba(255, 255, 255, 0)62%,#ffffff);
   		}
   	}
   	.datepicker-wheel {
