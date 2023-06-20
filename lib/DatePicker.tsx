@@ -148,7 +148,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
       )}
       <div className='datepicker-content'>
         {dataConfigList.map((item, index) => {
-          const wheelBorderRadiusClassName = index === 0 ? 'rounded-tr-none rounded-br-none' : index === (dataConfigList.length - 1) ? 'rounded-tl-none rounded-bl-none' : '';
+          const wheelBorderRadiusClassName = index === 0 ? 'rounded-tr-none rounded-br-none' : index === (dataConfigList.length - 1) ? 'rounded-tl-none rounded-bl-none' : 'rounded-none';
           return (
             <DatePickerItem
               key={index}
