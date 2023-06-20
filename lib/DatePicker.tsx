@@ -27,6 +27,10 @@ export interface DatePickerProps {
   onChange?: Function,
   onSelect?: Function,
   onCancel?: React.MouseEventHandler<HTMLButtonElement | HTMLDivElement>,
+  wheelClassName?: string
+  colOneClassName?: string
+  datePickerClassName?: string
+  datePickerListClassName?: string
 }
 
 const normalizeDateConfig = (dateConfig: Required<DatePickerProps>['dateConfig']) => {
@@ -89,6 +93,10 @@ const DatePicker: React.FC<DatePickerProps> = ({
   onSelect,
   onChange,
   onCancel,
+  wheelClassName = '',
+  colOneClassName = '',
+  datePickerClassName = '',
+  datePickerListClassName = '',
 }) => {
   const [value, setValue] = useState(nextDate(propsValue));
   useEffect(() => {
@@ -124,7 +132,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const dataConfigList = normalizeDateConfig(dateConfig);
   return (
     <div
-      className={`datepicker ${isTheme(theme) ? theme : 'default'}`}
+      className={`datepicker ${isTheme(theme) ? theme : 'default'} ${datePickerClassName}`}
     >
       {showHeader && (
         <div className='datepicker-header'>
@@ -148,7 +156,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
             step={item.step}
             type={item.type}
             format={item.format}
-            onSelect={handleDateSelect} />
+            onSelect={handleDateSelect}
+            wheelClassName={wheelClassName}
+            colOneClassName={colOneClassName}
+            datePickerListClassName={datePickerListClassName}
+          />
         ))}
       </div>
       {showFooter && (

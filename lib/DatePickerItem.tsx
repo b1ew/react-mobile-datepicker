@@ -20,6 +20,9 @@ interface Props {
   format: string | ((date: Date) => string),
   step: number,
   onSelect: Function,
+  wheelClassName?: string,
+  colOneClassName?: string,
+  datePickerListClassName?: string
 }
 
 const iniDates = ({ step, type, value }: Pick<Props, 'step' | 'type' | 'value'>) => Array(...Array(DATE_LENGTH))
@@ -35,6 +38,9 @@ const DatePickerItem: FC<Props> = ({
   format,
   step,
   onSelect,
+  wheelClassName = '',
+  colOneClassName = '',
+  datePickerListClassName = '',
 }) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const touchY = useRef(0);
@@ -225,7 +231,7 @@ const DatePickerItem: FC<Props> = ({
     return (
       <li
         key={`${index}`}
-        className={className}>
+        className={`${className} ${datePickerListClassName}`}>
         {formatDate}
       </li>
     );
@@ -237,13 +243,13 @@ const DatePickerItem: FC<Props> = ({
   } as React.CSSProperties;
 
   return (
-      <div className='datepicker-col-1'>
+      <div className={`datepicker-col-1 ${colOneClassName}`}>
         <div
           ref={viewportRef}
           className='datepicker-viewport'
           onMouseDown={handleContentMouseDown}
         >
-          <div className='datepicker-wheel'>
+          <div className={`datepicker-wheel ${wheelClassName}`}>
             <div
               className={`datepicker-scroll ${isAnimating ? 'active' : ''}`}
               style={scrollStyle}
