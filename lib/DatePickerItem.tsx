@@ -41,6 +41,7 @@ const DatePickerItem: FC<Props> = ({
   const translateY = useRef(0);
   const currentIndex = useRef(MIDDLE_INDEX);
   const moveDateCount = useRef(0);
+  const viewportRef = useRef<HTMLDivElement>(null);
   const [mouseDown, setMouseDown] = useState(false);
   const moveToTimer = useRef<ReturnType<typeof setTimeout> | void>();
   const [stateTranslateY, setStateTranslateY] = useState(MIDDLE_Y);
@@ -149,7 +150,6 @@ const DatePickerItem: FC<Props> = ({
   };
 
   const handleContentTouch: React.TouchEventHandler<HTMLDivElement> = (event) => {
-    event.preventDefault();
     if (isAnimating) return;
     if (event.type === 'touchstart') {
       handleStart(event);
@@ -189,6 +189,27 @@ const DatePickerItem: FC<Props> = ({
     }
   }, [mouseDown, handleContentMouseMove, handleContentMouseUp]);
 
+  useEffect(() => {
+    if (viewportRef?.current) {
+      // @ts-ignore
+      viewportRef.current.addEventListener('touchstart', handleContentTouch, { passive: false });
+      // @ts-ignore
+      viewportRef.current.addEventListener('touchmove', handleContentTouch, { passive: false });
+      // @ts-ignore
+      viewportRef.current.addEventListener('touchend', handleContentTouch, { passive: false });
+    }
+    return () => {
+      if (viewportRef?.current) {
+        // @ts-ignore
+        viewportRef.current.removeEventListener('touchstart', handleContentTouch);
+        // @ts-ignore
+        viewportRef.current.removeEventListener('touchmove', handleContentTouch);
+        // @ts-ignore
+        viewportRef.current.removeEventListener('touchend', handleContentTouch);
+      }
+    };
+  }, []);
+
   const renderDatepickerItem = useCallback((date: Date, index: number) => {
     const className =
       (date < min || date > max) ?
@@ -218,10 +239,8 @@ const DatePickerItem: FC<Props> = ({
   return (
       <div className='datepicker-col-1'>
         <div
+          ref={viewportRef}
           className='datepicker-viewport'
-          onTouchStart={handleContentTouch}
-          onTouchMove={handleContentTouch}
-          onTouchEnd={handleContentTouch}
           onMouseDown={handleContentMouseDown}
         >
           <div className='datepicker-wheel'>
