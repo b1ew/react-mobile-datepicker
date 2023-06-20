@@ -1,5 +1,4 @@
 node_modules/
 examples/__build__/
-dist
 yarn-error.log
 tsconfig.tsbuildinfo
