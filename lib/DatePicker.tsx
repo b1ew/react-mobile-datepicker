@@ -9,7 +9,9 @@ import {
   DateConfig, dateConfigMap, Theme, Unit,
 } from './types';
 import { isDateConfig, isDateConfigKey, isTheme } from './utils';
-import { convertDate, nextDate } from './utils/time';
+import { convertDate } from './utils/time';
+
+import { useStoreDate } from './';
 
 export interface DatePickerProps {
   theme?: Theme,
@@ -98,13 +100,14 @@ const DatePicker: React.FC<DatePickerProps> = ({
   datePickerClassName = '',
   datePickerListClassName = '',
 }) => {
-  const [value, setValue] = useState(nextDate(propsValue));
+  const { value, setValue } = useStoreDate();
+
   useEffect(() => {
-    setValue((stateValue) => {
-      if (stateValue.getTime() !== propsValue.getTime()) {
-        return new Date(propsValue);
+    useStoreDate.setState((state) => {
+      if (state.value.getTime() !== propsValue.getTime()) {
+        return { value: new Date(propsValue) };
       }
-      return stateValue;
+      return { value: state.value };
     });
   }, [propsValue]);
 

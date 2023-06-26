@@ -1,5 +1,6 @@
 import './index.css';
 import * as React from 'react';
+import { create } from 'zustand';
 
 import DatePicker, { DatePickerProps } from './DatePicker';
 import Modal from './Modal';
@@ -7,6 +8,16 @@ import Modal from './Modal';
 interface EnhanceDatePickerProps extends Pick<DatePickerProps, 'onCancel'> {
   isOpen?: boolean,
 }
+
+export type DateState = {
+  value: Date
+  setValue: (value: Date) => void
+};
+
+export const useStoreDate = create<DateState>((set) => ({
+  value: new Date(),
+  setValue: (value) => set(() => ({ value })),
+}));
 
 const EnhanceDatePicker: React.FC<EnhanceDatePickerProps> = ({ isOpen = false, onCancel, ...props }) => {
   const [isModal, setIsModal] = React.useState(false);
